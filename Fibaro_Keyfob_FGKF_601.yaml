@@ -1,0 +1,359 @@
+blueprint:
+  name: Fibaro Keyfob FGKF-601 events all button
+  description: 'Perform actions with Fibaro Keyfob FGKF601.
+It works
+1x press
+2x press
+3x press
+Holding
+The release always starts after the hold action'
+  domain: automation
+  input:
+    zwavejs_device:
+      name: ZWaveJS Device
+      description: The Fibaro Keyfob controller to listen for events on.
+      selector:
+        device:
+          integration: zwave_js
+          manufacturer: Fibargroup
+          model: FGKF601
+# Square button
+    tap_top_left_actions:
+      name: 1x Press Square \# button Actions
+      selector:
+        action:
+      default: []
+    2x_tap_top_left_actions:
+      name: 2x Press Square \# button Actions
+      selector:
+        action:
+      default: []
+    3x_tap_top_left_actions:
+      name: 3x Press Square \# button Actions
+      selector:
+        action:
+      default: []
+    hold_top_left_actions:
+      name: Hold Square \# button Actions
+      selector:
+        action:
+      default: []
+    release_top_left_actions:
+      name: Release Square \# button Actions
+      selector:
+        action:
+      default: []
+# Circle button
+    tap_top_right_actions:
+      name: Press Circle O button Actions
+      selector:
+        action:
+      default: []
+    2x_tap_top_right_actions:
+      name: 2x Press Circle O button Actions
+      selector:
+        action:
+      default: []
+    3x_tap_top_right_actions:
+      name: 3x Press Circle O button Actions
+      selector:
+        action:
+      default: []
+    hold_top_right_actions:
+      name: Hold Circle O button Actions
+      selector:
+        action:
+      default: []
+    release_top_right_actions:
+      name: Release Circle O button Actions
+      selector:
+        action:
+      default: []
+# Cross button
+    tap_middle_left_actions:
+      name: Press Cross X button Actions
+      selector:
+        action:
+      default: []
+    2x_tap_middle_left_actions:
+      name: 2x Press Cross X button Actions
+      selector:
+        action:
+      default: []
+    3x_tap_middle_left_actions:
+      name: 3x Press Cross X button Actions
+      selector:
+        action:
+      default: []
+    hold_middle_left_actions:
+      name: Hold Cross X button Actions
+      selector:
+        action:
+      default: []
+    release_middle_left_actions:
+      name: Release Cross X button Actions
+      selector:
+        action:
+      default: []
+# Triangle button
+    tap_middle_right_actions:
+      name: Press Triangle ^ button  Actions
+      selector:
+        action:
+      default: []
+    2x_tap_middle_right_actions:
+      name: 2x Press Triangle ^ button  Actions
+      selector:
+        action:
+      default: []
+    3x_tap_middle_right_actions:
+      name: 3x Press Triangle ^ button  Actions
+      selector:
+        action:
+      default: []
+    hold_middle_right_actions:
+      name: Hold Triangle ^ button  Actions
+      selector:
+        action:
+      default: []
+    release_middle_right_actions:
+      name: Release Triangle ^ button  Actions
+      selector:
+        action:
+      default: []
+# Minus button
+    tap_bottom_left_actions:
+      name: Press Minus \- button Actions
+      selector:
+        action:
+      default: []
+    2x_tap_bottom_left_actions:
+      name: 2x Press Minus \- button Actions
+      selector:
+        action:
+      default: []
+    3x_tap_bottom_left_actions:
+      name: 3x Press Minus \- button Actions
+      selector:
+        action:
+      default: []
+    hold_bottom_left_actions:
+      name: Hold Minus \- button Actions
+      selector:
+        action:
+      default: []
+    release_bottom_left_actions:
+      name: Release Minus \- button Actions
+      selector:
+        action:
+      default: []
+# Plus button
+    tap_bottom_right_actions:
+      name: Press Plus + button  Actions
+      selector:
+        action:
+      default: []
+    2x_tap_bottom_right_actions:
+      name: 2x Press Plus + button  Actions
+      selector:
+        action:
+      default: []
+    3x_tap_bottom_right_actions:
+      name: 3x Press Plus + button  Actions
+      selector:
+        action:
+      default: []
+    hold_bottom_right_actions:
+      name: Hold Plus + button  Actions
+      selector:
+        action:
+      default: []
+    release_bottom_right_actions:
+      name: Release Plus + button  Actions
+      selector:
+        action:
+      default: []
+
+mode: single
+trigger:
+- platform: event
+  event_type: zwave_js_value_notification
+variables:
+  logger: blueprint.zwavejs_scene_activation
+  zwavejs_device: !input 'zwavejs_device'
+action:
+- choose:
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.event.data.device_id == zwavejs_device }}'
+    - condition: template
+      value_template: '{{ trigger.event.data.command_class_name == ''Central Scene''
+        }}'
+    sequence:
+    - choose:
+# Square button
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 001'' and trigger.event.data.value
+            == ''KeyPressed'' }}'
+        sequence: !input 'tap_top_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 001'' and trigger.event.data.value
+            == ''KeyPressed2x'' }}'
+        sequence: !input '2x_tap_top_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 001'' and trigger.event.data.value
+            == ''KeyPressed3x'' }}'
+        sequence: !input '3x_tap_top_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 001'' and trigger.event.data.value
+            == ''KeyHeldDown'' }}'
+        sequence: !input 'hold_top_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 001'' and trigger.event.data.value
+            == ''KeyReleased'' }}'
+        sequence: !input 'release_top_left_actions'
+# Circle button
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 002'' and trigger.event.data.value
+            == ''KeyPressed'' }}'
+        sequence: !input 'tap_top_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 002'' and trigger.event.data.value
+            == ''KeyPressed2x'' }}'
+        sequence: !input '2x_tap_top_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 002'' and trigger.event.data.value
+            == ''KeyPressed3x'' }}'
+        sequence: !input '3x_tap_top_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 002'' and trigger.event.data.value
+            == ''KeyHeldDown'' }}'
+        sequence: !input 'hold_top_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 002'' and trigger.event.data.value
+            == ''KeyReleased'' }}'
+        sequence: !input 'release_top_right_actions'
+# Cross button
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 003'' and trigger.event.data.value
+            == ''KeyPressed'' }}'
+        sequence: !input 'tap_middle_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 003'' and trigger.event.data.value
+            == ''KeyPressed2x'' }}'
+        sequence: !input '2x_tap_middle_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 003'' and trigger.event.data.value
+            == ''KeyPressed3x'' }}'
+        sequence: !input '3x_tap_middle_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 003'' and trigger.event.data.value
+            == ''KeyHeldDown'' }}'
+        sequence: !input 'hold_middle_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 003'' and trigger.event.data.value
+            == ''KeyReleased'' }}'
+        sequence: !input 'release_middle_left_actions'
+# Triangle button
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 004'' and trigger.event.data.value
+            == ''KeyPressed'' }}'
+        sequence: !input 'tap_middle_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 004'' and trigger.event.data.value
+            == ''KeyPressed2x'' }}'
+        sequence: !input '2x_tap_middle_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 004'' and trigger.event.data.value
+            == ''KeyPressed3x'' }}'
+        sequence: !input '3x_tap_middle_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 004'' and trigger.event.data.value
+            == ''KeyHeldDown'' }}'
+        sequence: !input 'hold_middle_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 004'' and trigger.event.data.value
+            == ''KeyReleased'' }}'
+        sequence: !input 'release_middle_right_actions'
+# Minus button
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 005'' and trigger.event.data.value
+            == ''KeyPressed'' }}'
+        sequence: !input 'tap_bottom_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 005'' and trigger.event.data.value
+            == ''KeyPressed2x'' }}'
+        sequence: !input '2x_tap_bottom_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 005'' and trigger.event.data.value
+            == ''KeyPressed3x'' }}'
+        sequence: !input '3x_tap_bottom_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 005'' and trigger.event.data.value
+            == ''KeyHeldDown'' }}'
+        sequence: !input 'hold_bottom_left_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 005'' and trigger.event.data.value
+            == ''KeyReleased'' }}'
+        sequence: !input 'release_bottom_left_actions'
+# Plus button
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 006'' and trigger.event.data.value
+            == ''KeyPressed'' }}'
+        sequence: !input 'tap_bottom_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 006'' and trigger.event.data.value
+            == ''KeyPressed2x'' }}'
+        sequence: !input '2x_tap_bottom_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 006'' and trigger.event.data.value
+            == ''KeyPressed3x'' }}'
+        sequence: !input '3x_tap_bottom_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 006'' and trigger.event.data.value
+            == ''KeyHeldDown'' }}'
+        sequence: !input 'hold_bottom_right_actions'
+      - conditions:
+        - condition: template
+          value_template: '{{ trigger.event.data.label == ''Scene 005'' and trigger.event.data.value
+            == ''KeyReleased'' }}'
+        sequence: !input 'release_bottom_right_actions'
+
+      default:
+      - service: system_log.write
+        data:
+          level: debug
+          logger: '{{ logger }}'
+          message: Activated scene '{{ trigger.event.data.label }}' with value '{{
+            trigger.event.data.value }}' for node '{{ zwavejs_device }}' ({{ trigger.event.data.node_id
+            }})
+  default: []
