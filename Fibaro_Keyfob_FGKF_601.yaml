@@ -5,8 +5,8 @@ It works
 1x press
 2x press
 3x press
-Holding
-The release always starts after the hold action'
+Hold
+Release (The release always starts after the hold action)'
   source_url: https://github.com/Marlo461/home-assistant_blueprints/blob/main/Fibaro_Keyfob_FGKF_601.yaml
   domain: automation
   input:
