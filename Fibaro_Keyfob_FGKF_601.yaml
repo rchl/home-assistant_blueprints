@@ -345,7 +345,7 @@ action:
         sequence: !input 'hold_bottom_right_actions'
       - conditions:
         - condition: template
-          value_template: '{{ trigger.event.data.label == ''Scene 005'' and trigger.event.data.value
+          value_template: '{{ trigger.event.data.label == ''Scene 006'' and trigger.event.data.value
             == ''KeyReleased'' }}'
         sequence: !input 'release_bottom_right_actions'
 
