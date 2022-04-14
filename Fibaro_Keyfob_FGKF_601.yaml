@@ -6,7 +6,9 @@ It works
 2x press
 3x press
 Hold
-Release (The release always starts after the hold action)'
+Release (The release always starts after the hold action)
+Only one press works in the factory setting in the Fibaro Keyfob
+Enable pressing 2x and 3x must be changed parameters 21 to 26 to value 15 in the Fibaro Keyfob configuration.'
   source_url: https://github.com/Marlo461/home-assistant_blueprints/blob/main/Fibaro_Keyfob_FGKF_601.yaml
   domain: automation
   input:
