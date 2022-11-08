@@ -9,8 +9,8 @@ blueprint:
   input:
     window_entity:
       name: Okenný senzor
-      description: Okenný senzor, ktorý riadi klimatickú entitu. 
-        Ak máte viac okenných senzorov, vytvorte skupinový senzor.
+      description: Okenný senzor, ktorý riadi klimatickú entitu.
+      Ak máte viac okenných senzorov, vytvorte skupinový senzor.
       selector:
         entity:
           domain: binary_sensor
@@ -48,14 +48,14 @@ blueprint:
     open_action:
       name: Dodatočná akcia otvoré (nepovinné)
       description: Akcia, ktorá sa má vykonať, ak je otvorený dverový/okenný senzor 
-        (napr. otvorenie rolety, oznámenie TTS)
+      (napr. otvorenie rolety, oznámenie TTS)
       default: []
       selector:
         action: {}
     close_action:
       name: Dodatočná akcia zatvorené (nepovinné)
-      description: Akcia, ktorá sa má vykonať, ak sa senzor dverí/okna opäť zatvorí 
-        (napr. zatvorenie rolety, oznámenie TTS)
+      description: Akcia, ktorá sa má vykonať, ak sa senzor dverí/okna opäť zatvorí
+      (napr. zatvorenie rolety, oznámenie TTS)
       default: []
       selector:
         action: {}
