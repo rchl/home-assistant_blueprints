@@ -1,14 +1,15 @@
 blueprint:
   name: Fibaro Keyfob FGKF-601 events all button
-  description: 'Perform actions with Fibaro Keyfob FGKF601.
-It works
-1x press
-2x press
-3x press
-Hold
-Release (The release always starts after the hold action)
-Only one press works in the factory setting in the Fibaro Keyfob
-Enable pressing 2x and 3x must be changed parameters 21 to 26 to value 15 in the Fibaro Keyfob configuration.'
+  description: |
+    Perform actions with Fibaro Keyfob FGKF601.
+    It works
+    1x press
+    2x press
+    3x press
+    Hold
+    Release (The release always starts after the hold action)
+    Only one press works in the factory setting in the Fibaro Keyfob
+    Enable pressing 2x and 3x must be changed parameters 21 to 26 to value 15 in the Fibaro Keyfob configuration.
   source_url: https://github.com/Marlo461/home-assistant_blueprints/blob/main/Fibaro_Keyfob_FGKF_601.yaml
   domain: automation
   input:
@@ -22,27 +23,27 @@ Enable pressing 2x and 3x must be changed parameters 21 to 26 to value 15 in the
           model: FGKF601
 # Square button
     tap_top_left_actions:
-      name: 1x Press Square \# button Actions
+      name: '1x Press Square # button Actions'
       selector:
         action:
       default: []
     2x_tap_top_left_actions:
-      name: 2x Press Square \# button Actions
+      name: '2x Press Square # button Actions'
       selector:
         action:
       default: []
     3x_tap_top_left_actions:
-      name: 3x Press Square \# button Actions
+      name: '3x Press Square # button Actions'
       selector:
         action:
       default: []
     hold_top_left_actions:
-      name: Hold Square \# button Actions
+      name: 'Hold Square # button Actions'
       selector:
         action:
       default: []
     release_top_left_actions:
-      name: Release Square \# button Actions
+      name: 'Release Square # button Actions'
       selector:
         action:
       default: []
@@ -126,27 +127,27 @@ Enable pressing 2x and 3x must be changed parameters 21 to 26 to value 15 in the
       default: []
 # Minus button
     tap_bottom_left_actions:
-      name: Press Minus \- button Actions
+      name: 'Press Minus - button Actions'
       selector:
         action:
       default: []
     2x_tap_bottom_left_actions:
-      name: 2x Press Minus \- button Actions
+      name: '2x Press Minus - button Actions'
       selector:
         action:
       default: []
     3x_tap_bottom_left_actions:
-      name: 3x Press Minus \- button Actions
+      name: '3x Press Minus - button Actions'
       selector:
         action:
       default: []
     hold_bottom_left_actions:
-      name: Hold Minus \- button Actions
+      name: 'Hold Minus - button Actions'
       selector:
         action:
       default: []
     release_bottom_left_actions:
-      name: Release Minus \- button Actions
+      name: 'Release Minus - button Actions'
       selector:
         action:
       default: []
@@ -190,8 +191,7 @@ action:
     - condition: template
       value_template: '{{ trigger.event.data.device_id == zwavejs_device }}'
     - condition: template
-      value_template: '{{ trigger.event.data.command_class_name == ''Central Scene''
-        }}'
+      value_template: '{{ trigger.event.data.command_class_name == ''Central Scene'' }}'
     sequence:
     - choose:
 # Square button
@@ -356,7 +356,8 @@ action:
         data:
           level: debug
           logger: '{{ logger }}'
-          message: Activated scene '{{ trigger.event.data.label }}' with value '{{
+          message: |
+            Activated scene '{{ trigger.event.data.label }}' with value '{{
             trigger.event.data.value }}' for node '{{ zwavejs_device }}' ({{ trigger.event.data.node_id
             }})
   default: []
